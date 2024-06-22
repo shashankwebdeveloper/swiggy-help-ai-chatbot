@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { SessionsClient } from "dialogflow/src/v2";
-import {NextApiRequest,NextApiResponse} from "next";
 
 const projectId = process.env.DIALOGFLOW_PROJECT_ID;
 const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
