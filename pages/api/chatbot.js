@@ -18,6 +18,11 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
+
+  console.log('Project ID:', projectId);
+console.log('Client Email:', clientEmail);
+console.log('Private Key:', privateKey ? 'Loaded' : 'Not Loaded');
+
   const { message, sessionId } = req.body;
   if (!message || !sessionId) {
     return res.status(400).json({ error: 'Bad Request: Missing message or sessionId' });
