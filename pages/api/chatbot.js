@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { SessionsClient } from "dialogflow/src/v2";
+import { SessionsClient } from "@google-cloud/dialogflow";
 
 const projectId = process.env.DIALOGFLOW_PROJECT_ID;
 const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
@@ -12,6 +12,10 @@ const sessionClient = new SessionsClient({
     private_key: privateKey,
   },
 });
+
+console.log(`Project ID: "${projectId}"`);
+console.log(`Client Email: "${clientEmail}"`);
+console.log(`Private Key: Loaded`);
 export default async function handler(req, res) {
   // res.status(200).json({ name: "John Doe" });
 
@@ -30,7 +34,7 @@ console.log('Private Key:', privateKey ? 'Loaded' : 'Not Loaded');
   console.log('Message:', message);
   console.log('SessionId:', sessionId);
   try{
-  const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+  const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
   console.log('SessionPath:', sessionPath);
   const request = {
     session: sessionPath,

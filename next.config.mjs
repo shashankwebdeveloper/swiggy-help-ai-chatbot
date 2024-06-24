@@ -4,6 +4,8 @@
 // const dialogflowPrivateKey = process.env.DIALOGFLOW_PRIVATE_KEY
 //   ? process.env.DIALOGFLOW_PRIVATE_KEY.replace(/\\n/g, '\n')
 //   : '';
+
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
@@ -11,6 +13,8 @@ const nextConfig = {
     DIALOGFLOW_CLIENT_EMAIL: process.env.DIALOGFLOW_CLIENT_EMAIL,
     DIALOGFLOW_PRIVATE_KEY: process.env.DIALOGFLOW_PRIVATE_KEY.replace(/\\n/g, '\n'),
   },
+
 };
 
 export default nextConfig;
+
