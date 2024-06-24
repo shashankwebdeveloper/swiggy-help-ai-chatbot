@@ -4,8 +4,17 @@ import { SessionsClient } from "@google-cloud/dialogflow";
 
 const projectId = process.env.DIALOGFLOW_PROJECT_ID;
 const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
-const privateKey = process.env.DIALOGFLOW_PRIVATE_KEY.replace(/\\n/g, '\n');
+const privateKey = process.env.DIALOGFLOW_PRIVATE_KEY
+  ? process.env.DIALOGFLOW_PRIVATE_KEY.replace(/\\n/g, '\n')
+  : null;
 
+  if (!projectId || !clientEmail || !privateKey) {
+    console.error('Missing required environment variables');
+    if (!projectId) console.error('DIALOGFLOW_PROJECT_ID is missing');
+    if (!clientEmail) console.error('DIALOGFLOW_CLIENT_EMAIL is missing');
+    if (!privateKey) console.error('DIALOGFLOW_PRIVATE_KEY is missing or invalid');
+  }
+  
 const sessionClient = new SessionsClient({
   credentials: {
     client_email: clientEmail,
@@ -13,9 +22,10 @@ const sessionClient = new SessionsClient({
   },
 });
 
+
 console.log(`Project ID: "${projectId}"`);
 console.log(`Client Email: "${clientEmail}"`);
-console.log(`Private Key: Loaded`);
+console.log(`Private Key: ${privateKey ? 'Loaded' : 'Not Loaded'}`);
 export default async function handler(req, res) {
   // res.status(200).json({ name: "John Doe" });
 
